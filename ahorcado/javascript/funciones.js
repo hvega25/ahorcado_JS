@@ -1,4 +1,4 @@
-init();
+
 //funcion principal que es la que decide el curso del juego
 function init() {
   var control_switch = false;
@@ -36,52 +36,40 @@ function menu() {
 //funcion para imprimir los simbolos
 function jugar() {
   var palabra = prompt(`Ingresa una palabra`);
-  var longitud_palabra = palabra.length;
   var control_jugar = false;
+  var intentos = 0;
+  var aux = "";
 
-  //variable que guarda la cantidad de simbolos de una palabra solo para pruebas
-  var a = longitud_simbolos(longitud_palabra);
-
-  console.log(`${a}`);
+  console.log(`Que empiece el juego!!!`);
 
   //desde aqui iniciar el codigo para jugar validando si tiene 1 sola letra y si es aprobada
   while (control_jugar != true) {
     var letra = prompt(`Ingresa una letra`);
-    if (validores_letra(letra) == true) {
-      if (palabra.includes(letra) == true) {
-        console.clear();
-        console.log(
-          longitud_simbolos(
-            longitud_palabra,
-            letra,
-            letra_existe(palabra, letra)
-          )
-        );
-      }else{
-        console.log("Error arreglar")
-      }
-    }
+    //valida si es una letra y si existe en la palabra
+
+    if (
+      validores_letra(letra) == true &&
+      palabra.includes(letra) == true &&
+      aux.includes(" _ ") == true
+    ) {
+      for (var f = 0; f < aux.length; f++) {}
+    } else {
+      console.log("no es letra valida");
+    } //fin de comprobacion de si una letra valida
   }
 }
 
 //funcion para calcular los simolos
-function longitud_simbolos(longitud_palabra, letra, posicion) {
+function dibuja_palabra(palabra) {
   var simbolos = "";
-  if (letra == null || letra == NaN || posicion =http://127.0.1.1:4444/ahorcado/index.html= null || posicion == NaN) {
-    for (let a = 0; a < longitud_palabra; a++) {
-      simbolos = simbolos + " _ ";
-    }
-    return simbolos;
-  } else {
-    //error de programa
-    for (var a = 0; a < longitud_palabra; a++) {
-      if (a == posicion[a]) {
-        simbolos = simbolos + letra + " _ ";
-      }
-    }
+  for (var g = 0; g < palabra.length; g++) {
+    simbolos = simbolos + " _ ";
   }
+
+  return simbolos;
 }
 
+//valida si es una letra valida
 function validores_letra(letra) {
   if (
     letra.length <= 1 &&
@@ -96,14 +84,23 @@ function validores_letra(letra) {
   }
 }
 
-function letra_existe(palabra, letra) {
-  var palabra = "casa";
-  var letra = "a";
-  var posicion = [];
-  for (var a = 0; a < palabra.length; a++) {
-    if (palabra[a] == letra) {
-      posicion.push(a);
-    }
+function prueba(palabra, letra) {
+  var simbolos = "";
+  var aux = palabra;
+  for (var a = 0; a < aux.length; a++) {
+    if(aux[a] == letra ){
+        simbolos = simbolos +" "+ letra;
+    }else{
+      simbolos += " _ ";
+    } 
   }
-  return posicion;
+
+  console.log(simbolos);
 }
+
+function cambio (){}
+
+
+var palabra = "banana";
+var letra = "a";
+var g =  prueba(palabra, letra);

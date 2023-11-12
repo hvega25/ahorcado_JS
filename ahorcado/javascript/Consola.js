@@ -1,11 +1,10 @@
-init();
+
 //funcion principal que es la que decide el curso del juego
 function init() {
   var control_switch = false;
   var partidas_jugadas =0;
   localStorage.setItem('jugadas', partidas_jugadas);
-  localStorage.setItem('ganadas', 0);
-  localStorage.setItem('perdidas', 0);
+  localStorage.setItem('jugadas', 0);
   while (control_switch != true) {
     menu();
     var opcion = parseInt(prompt(`Ingresa tu opción del menu del 1 al 3`));
@@ -140,7 +139,6 @@ function validar_guion(p) {
       return true;
     }
   }
-
   return false;
 }
 
@@ -159,6 +157,6 @@ var win = localStorage.getItem('ganadas');
 var los = localStorage.getItem('perdidas');
 
 console.log(`Total de partidas: ${play}
-Partidas ganadas: (${((win/play)*100 )}%) ${win}
-Partidas perdidas: (${((los/play)*100 )}%) ${los}`);
+Partidas ganadas: ${win}
+Partidas perdidas: ${los}`);
 }

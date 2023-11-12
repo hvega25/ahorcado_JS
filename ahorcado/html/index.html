@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ahorcado Deadge</title>
-    <link rel="icon" href="/imagenes/deadge.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/estilos/estilos.css">
-</head>
-<body>
-    <script src="/javascript/funciones.js"></script>
-</body>
+    <link rel="icon" href="/ahorcado/imagenes/deadge.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/ahorcado/estilos/estilos.css" />
+  </head>
+  <body>
+    <div class="contenedor-botones">
+      <button id="iniciar" onclick="dibujar()">Iniciar juego</button>
+      <button id="estaditicas">Estadisticas</button>
+      <button id="salir">Salir</button>
+      <script src="/ahorcado/javascript/Consola.js"></script>
+    </div>
+
+    <div class="contenedor-alfabeto">
+        <p id="alfa"></p>
+      </div>
+
+    <div class="contenedor-palabra">
+      <p id="palabra"></p>
+    </div>
+  </body>
 </html>

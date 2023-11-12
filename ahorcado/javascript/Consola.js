@@ -2,18 +2,22 @@ init();
 //funcion principal que es la que decide el curso del juego
 function init() {
   var control_switch = false;
-  menu();
-
-  var opcion = parseInt(prompt(`Ingresa tu opción del menu del 1 al 3`));
+  var partidas_jugadas =0;
+  localStorage.setItem('jugadas', partidas_jugadas);
+  localStorage.setItem('ganadas', 0);
+  localStorage.setItem('perdidas', 0);
   while (control_switch != true) {
+    menu();
+    var opcion = parseInt(prompt(`Ingresa tu opción del menu del 1 al 3`));
     if (opcion >= 1 && opcion <= 3) {
       switch (opcion) {
-        case 1: 
+        case 1:
+          partidas_jugadas++;
           jugar();
-          control_switch = true;
+          localStorage.setItem('jugadas', partidas_jugadas);
           break;
         case 2:
-          control_switch = true;
+        estadisticas();
           break;
         case 3:
           control_switch = true;
@@ -29,10 +33,10 @@ function init() {
 //Función para acortar código solo muestra un menu
 function menu() {
   console.log(`Opciones
-    1. Iniciar el juego
-    2. Estadisticas
-    3. Salir
-    `);
+   1. Iniciar el juego
+   2. Estadisticas
+   3. Salir
+   `);
 }
 
 //Función que despliega el juego
@@ -40,42 +44,40 @@ function jugar() {
   var palabra = prompt(`Ingresa una palabra`);
   var control_jugar = false;
   var intentos = 0;
-  var intentos_maximos = 8;
+  var ganadas = 0;
+  var perdidas =0;
+
   //variable que guarda la palabra transformada de string en un array para su facil calculo
-  var palabraL = conversion_palabra(palabra);
+  var palabraL = conversion_palabra(palabra.toLocaleLowerCase());
   console.log(`Que empiece el juego!!!`);
   imprimir_guiones(`${palabraL[1]}`);
   var letras_usadas = [];
   //desde aqui iniciar el codigo para jugar validando si tiene 1 sola letra y si es aprobada
   while (control_jugar != true) {
     var letra = prompt(`Ingresa una letra`);
-
-    //aqui meto el contador
-    if (intentos < intentos_maximos + 1) {
-      //primer if que controla si la letra existe en la palabra a buscar
-      if (palabraL[0].includes(letra)) {
-        //if que validad si la letra es valida es decir si esta dentro de a y z en mayuscula y minuscula
-        if (validores_letra(letra) == true) {
-          var actualizada = actualizar_palabra(palabraL, letra);
-          imprimir_guiones(`${palabraL[1]}`);
-          console.log(`Letra falladas: ${letras_usadas}`);
-          //if que valida si existe incognitas en la palabtra
-          if (validar_guion(actualizada[1]) != true) {
-            control_jugar = true;
-          }
-        } else {
-          console.log(`Letra no valida`);
-          intentos = intentos  + 1 ;
+    if (intentos < 8) {
+      if (palabraL[0].includes(letra.toLocaleLowerCase()) && validores_letra(letra.toLocaleLowerCase()) == true) {
+        var actualizada = actualizar_palabra(palabraL, letra.toLocaleLowerCase());
+        imprimir_guiones(`${palabraL[1]}`);
+        console.log(`Intento ${intentos}/8 Letra falladas: ${letras_usadas}`);
+        if (validar_guion(actualizada[1]) != true) {
+          console.log(`Felicidades has ganado`);
+          control_jugar = true;
+          ganadas++;
+          localStorage.setItem('ganadas', ganadas);
         }
-      } else {
+      }else{
+        imprimir_guiones(`${palabraL[1]}`);
+        intentos++;
         letras_usadas.push(letra);
+        console.log(`Intento ${intentos}/8 Letra falladas: ${letras_usadas}`);
       }
     }else{
-      console.log(` HAS PERDIDO !  !  !`);
+      perdidas++;
+      localStorage.setItem('perdidas', perdidas);
+      console.log(`Has muerto deadge`);
       control_jugar = true;
     }
-
-    //termina aqui contador
   }
 }
 
@@ -138,19 +140,25 @@ function validar_guion(p) {
       return true;
     }
   }
+
   return false;
 }
 
 //Método que imprime los guiones de la palabra en consola para indicarle al usuario cuantas letras tiene que adivinar
 function imprimir_guiones(pal) {
   var simbolos = "";
-  for (var s = 0; s < pal.length; s++) {
-    if (pal[s] != "_") {
-      simbolos = simbolos + pal[s] + " ";
-    } else {
-      simbolos = simbolos + " _ ";
-    }
-  }
 
+  simbolos = pal;
   console.log(simbolos);
+}
+
+
+function estadisticas(){
+var play = localStorage.getItem('jugadas');
+var win = localStorage.getItem('ganadas');
+var los = localStorage.getItem('perdidas');
+
+console.log(`Total de partidas: ${play}
+Partidas ganadas: (${((win/play)*100 )}%) ${win}
+Partidas perdidas: (${((los/play)*100 )}%) ${los}`);
 }

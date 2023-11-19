@@ -8,9 +8,20 @@
     <link rel="stylesheet" href="/ahorcado/estilos/estilos.css" />
   </head>
   <body>
-    <div id="jocPenjat"></div>
-    <div id="abecedari"></div>
-    <img src="/ahorcado/imagenes/penjat_0.png" id="imatgePenjat" />
-    <div id="lletrasUtilitzades"></div>
+    <div id="jocPenjat">
+      <a class="btn btn-1" onclick="jugar()">Jugar</a>
+      <a class="btn btn-2" onclick="estadisticas()">Estadisticas</a>
+     
+    </div>
+    <div class="contenedor_palabras">
+      <h1 id="mostra_palabra"></h1>
+    </div>
+  
+    <div id="abecedario"></div>
+    <img src="" id="imatgePenjat" />
+    <div id="lletrasUtilitzades"> 
+      <div id="falladas"></div>
+    </div>
+    <script src="/ahorcado/javascript/pantalla.js"></script>
   </body>
 </html>

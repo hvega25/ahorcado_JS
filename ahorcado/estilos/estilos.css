@@ -1,7 +1,50 @@
-body{
-    background-color:#3c3f43;
-}
 
-.contenedor-botones{
+  
+  #jocPenjat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0 auto;
+    width: 20%;
+  }
+  
+  .contenedor_palabras{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0 auto;
+    width: 20%;
+  }
+  
+  #abecedario {
+    padding: 30px;
+  
+  padding-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0 auto;
+    width: 20%;
+  }
+  
+  .btn:hover {
+    background-position: right center;
+  }
+  
+  
+  .btn {
+    padding: 15px;
     text-align: center;
-}
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 15% ;
+    color: rgb(16, 16, 16);
+    box-shadow: 0 0 20px #b03535;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  
